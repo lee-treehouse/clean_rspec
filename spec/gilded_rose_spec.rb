@@ -12,13 +12,16 @@ RSpec.describe GildedRose do
 
   # #methodname implies instance method, .methodname implies class method
   describe "#enroll" do 
-    # now let's talk about how we could describe the behaviour we're asserting on each time (this will be example of bad)
-    it "adds a participant to a workshop when the class is not full" do 
-      expect(true).to be_truthy 
-    end  
-    it "does not add a participant to a workshop when the class is full" do 
-      expect(true).to be_truthy 
-    end      
+    context "when the class is not full" do
+      it "adds a participant to a workshop" do 
+        expect(true).to be_truthy 
+      end
+    end
+    context "when the class is full" do
+      it "does not add a participant to a workshop when the class is full" do 
+        expect(true).to be_truthy 
+      end 
+    end     
   end
  
   it "normal item after sell date" do
