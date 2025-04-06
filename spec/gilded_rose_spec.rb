@@ -46,9 +46,14 @@ RSpec.describe GildedRose do
 
   #now lets talk about let, let!, vs before
   #we want to really run this example so let's add some classes but the implementation is not important it's just for sake of argument
+  # let is lazily loaded - it won't run until it's called
+  #let(:workshop) {Workshop.new(seats:15)}
+  # let! is eager loaded, it's the same as before except there is a variable assignment
+  #before {Workshop.new(seats:15)}
+  let!(:workshop) {Workshop.new(seats:15)}
+  
   describe "Workshop" do    
     describe "#enroll" do
-      workshop = Workshop.new(seats:15)
       participant = Participant.new("Lee")
       context "when the conditions we want to test are happening" do
         it 'the thing we want to happen happens' do
