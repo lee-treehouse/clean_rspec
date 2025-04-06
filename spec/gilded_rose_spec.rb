@@ -13,6 +13,7 @@ RSpec.describe GildedRose do
          @participants << participant
       end 
     end
+    def noop; end
   end
 
   class Participant
@@ -50,15 +51,24 @@ RSpec.describe GildedRose do
   #let(:workshop) {Workshop.new(seats:15)}
   # let! is eager loaded, it's the same as before except there is a variable assignment
   #before {Workshop.new(seats:15)}
-  let!(:workshop) {Workshop.new(seats:15)}
+  #before runs for each it block in scope (same as let!) let's demonstrate 
   
   describe "Workshop" do    
+    let!(:workshop) do
+      puts "it's getting workshop in here" #see that got printed a lot and then when I moved it into the describe, only twice 
+      Workshop.new(seats:15)
+    end
+  
+
     describe "#enroll" do
       participant = Participant.new("Lee")
       context "when the conditions we want to test are happening" do
         it 'the thing we want to happen happens' do
           workshop.enroll(participant)
           expect(workshop.instance_variable_get(:@participants).length).to be(1)
+        end
+        it 'the other thing we want to happen happens' do
+          expect(true).to be_truthy 
         end
       end
     end 
