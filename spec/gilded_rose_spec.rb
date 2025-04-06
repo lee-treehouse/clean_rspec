@@ -69,6 +69,7 @@ RSpec.describe GildedRose do
           expect(workshop.instance_variable_get(:@participants).length).to be(1)
         end
         it 'the other thing we want to happen happens' do
+          workshop.noop #our puts now printed twice
           expect(true).to be_truthy 
         end
       end
