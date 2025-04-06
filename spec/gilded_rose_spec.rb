@@ -2,6 +2,25 @@ require "spec_helper"
 require "./lib/gilded_rose"
 
 RSpec.describe GildedRose do
+  
+  class Workshop
+    def initialize(seats: 10)
+      @participants = []
+      @seats = seats
+    end
+    def enroll(participant)
+      if @participants.length < @seats
+         @participants << participant
+      end 
+    end
+  end
+
+  class Participant
+    def initialize(first_name)
+      @first_name = first_name
+    end
+  end
+  
   # let's be very explicit about what subject is, instead of gaining subject definition automagically
   subject(:gilded_rose) {described_class.new}
   let(:name) { 'Normal Item' }
@@ -23,6 +42,21 @@ RSpec.describe GildedRose do
         expect(true).to be_truthy 
       end 
     end     
+  end
+
+  #now lets talk about let, let!, vs before
+  #we want to really run this example so let's add some classes but the implementation is not important it's just for sake of argument
+  describe "Workshop" do    
+    describe "#enroll" do
+      workshop = Workshop.new(seats:15)
+      participant = Participant.new("Lee")
+      context "when the conditions we want to test are happening" do
+        it 'the thing we want to happen happens' do
+          workshop.enroll(participant)
+          expect(workshop.instance_variable_get(:@participants).length).to be(1)
+        end
+      end
+    end 
   end
  
   
