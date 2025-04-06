@@ -84,6 +84,8 @@ RSpec.describe GildedRose do
   # perhaps have nested context: normal item, when after sell date
   describe "#tick with normal item" do
     context "when after sell date" do
+      # so does it really matter if this is in a let block or not? well, we're not creating it each it block
+      # In particular, if we are using it in lots and lots of blocks then maybe the let is better
       gr = GildedRose.new(name: "Normal Item", days_remaining: -10, quality: 10)
       gr.tick  
     
