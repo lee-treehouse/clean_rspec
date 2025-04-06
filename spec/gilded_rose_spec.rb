@@ -10,6 +10,19 @@ RSpec.describe GildedRose do
     expect(gilded_rose).to be_a(GildedRose)
   end
 
+  # #methodname implies instance method, .methodname implies class method
+  describe "#enroll" do 
+    it "fake test" do 
+      expect(true).to be_truthy 
+    end  
+  end
+
+  describe ".create" do 
+    it "fake test" do 
+      expect(true).to be_truthy 
+    end  
+  end
+ 
   it "normal item after sell date" do
     gr = GildedRose.new(name: "Normal Item", days_remaining: -10, quality: 10)
 
