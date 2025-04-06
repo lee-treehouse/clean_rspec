@@ -2,10 +2,12 @@ require "spec_helper"
 require "./lib/gilded_rose"
 
 RSpec.describe GildedRose do
+  # let's be very explicit about what subject is, instead of gaining subject definition automagically
+  subject(:gilded_rose) {GildedRose.new}
   let(:name) { 'Normal Item' }
 
   it "is a gilded rose" do
-    expect(subject).to be_a(GildedRose)
+    expect(gilded_rose).to be_a(GildedRose)
   end
 
   it "normal item after sell date" do
