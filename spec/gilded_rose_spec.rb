@@ -12,6 +12,7 @@ RSpec.describe GildedRose do
 
   # #methodname implies instance method, .methodname implies class method
   describe "#enroll" do 
+    # suggestion is: if you are using 'when' in an it block, should you be using a context?
     context "when the class is not full" do
       it "adds a participant to a workshop" do 
         expect(true).to be_truthy 
@@ -24,6 +25,24 @@ RSpec.describe GildedRose do
     end     
   end
  
+  
+  # improve with describe and context but not with before / beforeach 
+  # perhaps have nested context: normal item, when after sell date
+  describe "#tick with normal item" do
+    context "when after sell date" do
+      gr = GildedRose.new(name: "Normal Item", days_remaining: -10, quality: 10)
+      gr.tick  
+    
+      it "reduces days remaining by 1" do 
+        expect(gr.days_remaining).to eq(-11)
+      end
+
+      it "reduces quality by 2" do 
+        expect(gr.quality).to eq(8)
+      end
+    end     
+  end
+  
   it "normal item after sell date" do
     gr = GildedRose.new(name: "Normal Item", days_remaining: -10, quality: 10)
 
