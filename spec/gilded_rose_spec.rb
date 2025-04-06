@@ -54,8 +54,9 @@ RSpec.describe GildedRose do
   #before runs for each it block in scope (same as let!) let's demonstrate 
   
   describe "Workshop" do    
-    let!(:workshop) do
-      puts "it's getting workshop in here" #see that got printed a lot and then when I moved it into the describe, only twice 
+    let(:workshop) do
+      #puts "it's getting workshop in here" #see that got printed a lot and then when I moved it into the describe, only twice 
+      puts "it's getting workshop in here" #see that got printed only once due to lazy load
       Workshop.new(seats:15)
     end
   
