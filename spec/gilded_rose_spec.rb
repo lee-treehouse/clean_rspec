@@ -3,7 +3,7 @@ require "./lib/gilded_rose"
 
 RSpec.describe GildedRose do
   # let's be very explicit about what subject is, instead of gaining subject definition automagically
-  subject(:gilded_rose) {GildedRose.new}
+  subject(:gilded_rose) {described_class.new}
   let(:name) { 'Normal Item' }
 
   it "is a gilded rose" do
