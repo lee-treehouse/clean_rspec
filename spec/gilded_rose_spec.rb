@@ -3,6 +3,14 @@ require "./lib/gilded_rose"
 
 RSpec.describe GildedRose do
   
+  class Messenger
+    def initialize(participant)
+      puts "messenger instantiated"    
+    end
+    def notify
+      puts "notify called"
+    end
+  end
   class Workshop
     def initialize(seats: 10)
       @participants = []
@@ -11,6 +19,8 @@ RSpec.describe GildedRose do
     def enroll(participant)
       if @participants.length < @seats
          @participants << participant
+         messenger = Messenger.new(participant)
+         messenger.notify
       end 
     end
     def noop; end
@@ -64,7 +74,7 @@ RSpec.describe GildedRose do
     describe "#enroll" do
       participant = Participant.new("Lee")
       context "when the conditions we want to test are happening" do
-        it 'the thing we want to happen happens' do
+        fit 'the thing we want to happen happens' do
           workshop.enroll(participant)
           # we can demonstrate the memoisation by accessing workshop again. still only two puts
           # but if we go back to let!? still only two so it's memoised as well 
@@ -74,6 +84,23 @@ RSpec.describe GildedRose do
         it 'the other thing we want to happen happens' do
           workshop.noop #our puts now printed twice
           expect(true).to be_truthy 
+        end
+        # around 45:00 we start talking about it_behaves_like and shared examples 
+        # https://www.youtube.com/watch?v=e4HORZgt8-U
+        # we talk about why it's nice for the writer but not the reader
+        
+        # now let's talk about mocks and stubs and when we shouldn't use them
+        # 54:20
+        # we're talking about having a double for the subject receive a call
+        # now we talk about expect_any_instance_of(OtherObj).to_receive(:method_name)
+        # and we're pointing out the 'coincidental' risk here, that any instance of doesn't highlilght the necessary connection
+        # so the instead example looks like 
+        # 
+        it "here is my it block" do
+          messenger = double
+          expect(Messenger).to receive(:new).with(participant).and_return(messenger)
+          expect(messenger).to receive(:notify) 
+          workshop.enroll(participant) 
         end
       end
     end 
@@ -98,7 +125,9 @@ RSpec.describe GildedRose do
       end
     end     
   end
-  
+
+
+
   it "normal item after sell date" do
     gr = GildedRose.new(name: "Normal Item", days_remaining: -10, quality: 10)
 
