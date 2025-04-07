@@ -74,7 +74,7 @@ RSpec.describe GildedRose do
     describe "#enroll" do
       participant = Participant.new("Lee")
       context "when the conditions we want to test are happening" do
-        it 'the thing we want to happen happens' do
+        fit 'the thing we want to happen happens' do
           workshop.enroll(participant)
           # we can demonstrate the memoisation by accessing workshop again. still only two puts
           # but if we go back to let!? still only two so it's memoised as well 
@@ -96,7 +96,7 @@ RSpec.describe GildedRose do
         # and we're pointing out the 'coincidental' risk here, that any instance of doesn't highlilght the necessary connection
         # so the instead example looks like 
         # 
-        fit "here is my it block" do
+        it "here is my it block" do
           messenger = double
           expect(Messenger).to receive(:new).with(participant).and_return(messenger)
           expect(messenger).to receive(:notify) 
