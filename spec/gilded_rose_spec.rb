@@ -74,7 +74,7 @@ RSpec.describe GildedRose do
     describe "#enroll" do
       participant = Participant.new("Lee")
       context "when the conditions we want to test are happening" do
-        fit 'the thing we want to happen happens' do
+        it 'the thing we want to happen happens' do
           workshop.enroll(participant)
           # we can demonstrate the memoisation by accessing workshop again. still only two puts
           # but if we go back to let!? still only two so it's memoised as well 
