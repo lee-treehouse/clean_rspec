@@ -96,7 +96,7 @@ RSpec.describe GildedRose do
         # and we're pointing out the 'coincidental' risk here, that any instance of doesn't highlilght the necessary connection
         # so the instead example looks like 
         # 
-        it "here is my it block" do
+        fit "here is my it block" do
           messenger = double
           expect(Messenger).to receive(:new).with(participant).and_return(messenger)
           expect(messenger).to receive(:notify) 
